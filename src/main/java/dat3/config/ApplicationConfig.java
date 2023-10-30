@@ -1,8 +1,6 @@
 package dat3.config;
 
-import dat3.controller.impl.AccessManagerController;
 import dat3.routes.Routes;
-import dat3.security.RouteRoles;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.plugin.bundled.RouteOverviewPlugin;
@@ -17,14 +15,12 @@ import java.util.Properties;
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class ApplicationConfig {
 
-    private static final AccessManagerController ACCESS_MANAGER_HANDLER = new AccessManagerController();
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
     private static void configuration(JavalinConfig config) {
-        config.routing.contextPath = "/api/v1"; // base path for all routes
+        config.routing.contextPath = "/api/"; // base path for all routes
         config.http.defaultContentType = "application/json"; // default content type for requests
-        config.plugins.register(new RouteOverviewPlugin("/", RouteRoles.ANYONE)); // enables route overview at /
-        config.accessManager(ACCESS_MANAGER_HANDLER::accessManagerHandler);
+        config.plugins.register(new RouteOverviewPlugin("/")); // enables route overview at /
     }
 
     public static void startServer(Javalin app, int port) {
