@@ -18,7 +18,7 @@ public class ApplicationConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
     private static void configuration(JavalinConfig config) {
-        config.routing.contextPath = "/api/"; // base path for all routes
+        config.routing.contextPath = "/api"; // base path for all routes
         config.http.defaultContentType = "application/json"; // default content type for requests
         config.plugins.register(new RouteOverviewPlugin("/")); // enables route overview at /
     }
